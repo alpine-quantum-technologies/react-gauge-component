@@ -31,13 +31,13 @@
     "prebuild": "rimraf dist",
     "build": "set NODE_ENV=production babel src/lib --out-dir dist --copy-files",
     "build:types": "tsc",
-    "build-package": "pnpm run build && yarn run build:types",
+    "build-package": "yarn run build && yarn run build:types",
     "build-page": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "predeploy": "pnpm run build-page",
+    "predeploy": "yarn run build-page",
     "deploy": "gh-pages -d build",
-    "test-local": "pnpm run build && npm pack --pack-destination ./"
+    "test-local": "yarn run build && npm pack --pack-destination ./"
   },
   "resolutions": {
     "@types/react": "~17.0.1"

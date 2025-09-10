@@ -12,6 +12,8 @@ jobs:
         uses: actions/checkout@v4.2.2
       - name: Setup Yarn
         uses: threeal/setup-yarn-action@v2.0.0
+        with:
+          cache: false
       - name: Install dependencies
         run: yarn install
       - name: build
@@ -25,9 +27,9 @@ jobs:
     strategy:
       matrix:
         scan: [
-          secret-scan, 
-          sast-scan, 
-          dependency-scan, 
+          secret-scan,
+          sast-scan,
+          dependency-scan,
           dast-scan,
           lint-scan
         ]
@@ -36,6 +38,8 @@ jobs:
         uses: actions/checkout@v4.2.2
       - name: Setup Yarn
         uses: threeal/setup-yarn-action@v2.0.0
+        with:
+          cache: false
 
       - name: Install dependencies
         run: yarn install
@@ -43,14 +47,14 @@ jobs:
       - name: Secret Scanner
         if: matrix.scan == 'secret-scan'
         uses: secret-scanner/action@0.0.2
-     
+
       - name: nodejsscan scan
         if: matrix.scan == 'sast-scan'
         id: njsscan
         uses: ajinabraham/njsscan-action@master
         with:
           args: '.'
-      
+
       - name: Depcheck
         if: matrix.scan == 'dependency-scan'
         uses: dependency-check/Dependency-Check_Action@main

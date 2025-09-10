@@ -8,7 +8,7 @@ import { isEmptyObject, mergeObjects } from "./hooks/utils";
 import { Dimensions, defaultDimensions } from "./types/Dimensions";
 import { PointerRef, defaultPointerRef } from "./types/Pointer";
 import { Arc, getArcWidthByType } from "./types/Arc";
-import { debounce } from "lodash";
+import { debounce } from "lodash-es";
 /*
 GaugeComponent creates a gauge chart using D3
 The chart is responsive and will have the same width as the "container"

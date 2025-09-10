@@ -17,11 +17,10 @@ jobs:
         with:
           node-version: '20'
           registry-url: 'https://registry.npmjs.org'
-      - uses: c-hive/gha-yarn-cache@v2
       - name: Install dependencies
-        run: yarn install
+        run: npx yarn install
       - name: build
-        run: yarn run build
+        run: npx yarn run build
 
 
   test:
@@ -103,8 +102,6 @@ jobs:
         with:
           node-version: '20'
           registry-url: 'https://registry.npmjs.org'
-
-      - uses: c-hive/gha-yarn-cache@v2
 
       - name: Install dependencies
         run: npx yarn install

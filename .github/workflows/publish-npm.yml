@@ -11,16 +11,13 @@ jobs:
     #needs: pre
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-          registry-url: 'https://registry.npmjs.org'
+        uses: actions/checkout@v4.2.2
+      - name: Setup Yarn
+        uses: threeal/setup-yarn-action@v2.0.0
       - name: Install dependencies
-        run: npx yarn install
+        run: yarn install
       - name: build
-        run: npx yarn run build
+        run: yarn run build
 
 
   test:

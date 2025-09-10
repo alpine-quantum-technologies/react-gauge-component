@@ -47,10 +47,8 @@ jobs:
           node-version: '20'
           registry-url: 'https://registry.npmjs.org'
 
-      - uses: c-hive/gha-yarn-cache@v2
-
       - name: Install dependencies
-        run: yarn install
+        run: npx yarn install
 
       - name: Secret Scanner
         if: matrix.scan == 'secret-scan'
@@ -84,14 +82,14 @@ jobs:
       - name: Run DAST
         if: matrix.scan == 'dast-scan'
         run: |
-          yarn add global serve
-          yarn run build-page
-          yarn run serve -s build &
+          npx yarn add global serve
+          npx yarn run build-page
+          npx yarn run serve -s build &
           sleep 5
           docker run --network host -v $(pwd):/zap/wrk/:rw -t zaproxy/zap-stable zap-baseline.py -t http://localhost:3000
       - name: Test lint
         if: matrix.scan == 'lint-scan'
-        run: yarn run eslint
+        run: npx yarn run eslint
   
   publish:
     runs-on: ubuntu-latest
@@ -109,7 +107,7 @@ jobs:
       - uses: c-hive/gha-yarn-cache@v2
 
       - name: Install dependencies
-        run: yarn install
+        run: npx yarn install
 
       - name: Extract tag version number
         id: get_version
@@ -121,7 +119,7 @@ jobs:
         with:
           version: ${{steps.get_version.outputs.version-without-v}}
       - name: build
-        run: yarn run build-package
+        run: npx yarn run build-package
       - name: Publish to npm
         run: npm publish --access public
         env:

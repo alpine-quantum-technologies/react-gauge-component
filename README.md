@@ -2,7 +2,9 @@
 React Gauge Chart Component for data visualization.
 
 This is forked from [@Martin36/react-gauge-chart](https://github.com/Martin36/react-gauge-chart) [0b24a45](https://github.com/Martin36/react-gauge-chart/pull/131).
-Key differences:
+<details> 
+<summary>🔑Key differences</summary>
+
 <ul>
   <li>Added min/max values</li>
   <li>Added grafana based gauge</li>
@@ -21,6 +23,7 @@ Key differences:
   <li>Fixed needing to set height bug</li>
   <li>Fixed needing to set id bug</li>
 </ul>
+</details>
 
 # Demo
 https://antoniolago.github.io/react-gauge-component/
@@ -29,7 +32,9 @@ https://antoniolago.github.io/react-gauge-component/
 Install it by running `npm install react-gauge-component --save` or `yarn add react-gauge-component`. Then to use it:
 
 ```jsx
-import GaugeComponent from 'react-gauge-component'
+import GaugeComponent from 'react-gauge-component';
+//or
+import { GaugeComponent } from 'react-gauge-component';
 
 //Component with default values
 <GaugeComponent />
@@ -112,7 +117,7 @@ const kbitsToMbits = (value) => {
   }}
   labels={{
     valueLabel: {
-      fontSize: 40,
+      style: {fontSize: 40},
       formatTextValue: kbitsToMbits
     },
     tickLabels: {
@@ -133,7 +138,7 @@ const kbitsToMbits = (value) => {
         { value: 2500 },
         { value: 3000 },
       ],
-      valueConfig: {
+      defaultTickValueConfig: {
         formatTextValue: kbitsToMbits
       }
     }
@@ -211,7 +216,10 @@ const kbitsToMbits = (value) => {
     valueLabel: { formatTextValue: value => value + 'ºC' },
     tickLabels: {
       type: 'outer',
-      valueConfig: { formatTextValue: value => value + 'ºC', fontSize: 10 },
+      defaultTickValueConfig: { 
+        formatTextValue: (value: any) => value + 'ºC' ,
+        style: {fontSize: 10}
+    },
       ticks: [
         { value: 13 },
         { value: 22.5 },
@@ -362,6 +370,7 @@ const kbitsToMbits = (value) => {
       "radial": <code>0.2</code>.</li>
       <li><code>nbSubArcs: number</code>: The number of subArcs. This overrides <code>subArcs</code>. Default: <code>undefined</code></li>
       <li><code>colorArray: Array&lt;string&gt;</code>: The colors of the arcs. This overrides <code>subArcs</code> colors. Default: <code>undefined</code></li>
+      <li><code>emptyColor: string</code>: The default color of the grafana's "empty" subArc color. Default: <code>"#5C5C5C"</code></li>
       <li><code>gradient: boolean</code>: This will draw a single arc with all colors provided in subArcs, using limits as references to draw the linear-gradient result. (limits may not be accurate in this mode) Default: <code>false</code>.</li>
       <li><code>subArcs: Array&lt;object&gt;</code>: The subArcs of the gauge.
         <ul>
@@ -393,6 +402,7 @@ const kbitsToMbits = (value) => {
     <li><code>pointer: object</code>: The value pointer of the gauge. Grafana gauge have it's own pointer logic, but animation properties will be applied.
       <ul>
         <li><code>type: string</code> This can be "needle", "blob" or "arrow". Default: <code>"needle"</code></li>
+        <li><code>hide: boolean</code> Enabling this flag will hide the pointer. Default: <code>false</code></li>
         <li><code>color: string</code>: The color of the pointer. Default: <code>#464A4F</code></li>
         <li><code>baseColor: string</code>: The color of the base of the pointer. Default: <code>#464A4F</code></li>
         <li><code>length: number</code>: The length of the pointer 0-1, 1 being the outer radius length. Default: <code>0.70</code></li>
@@ -401,6 +411,7 @@ const kbitsToMbits = (value) => {
         <li><code>animationDuration: number</code>: The duration of the pointer animation. Default: <code>3000</code></li>
         <li><code>animationDelay: number</code>: The delay of the pointer animation. Default: <code>100</code></li>
         <li><code>width: number</code>: The width of the pointer. Default: <code>20</code></li>
+        <li><code>strokeWidth: number</code>: Only available for blob type. Set the width of the stroke. Default: <code>8</code></li>
       </ul>
     </li>
     <li><code>labels: object</code>: The labels of the gauge.
